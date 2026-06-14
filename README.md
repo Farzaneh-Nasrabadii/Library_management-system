@@ -31,3 +31,16 @@ The system relies on three interconnected tables:
 1. Members: Stores personal details and unique member codes.
 2. Books: Tracks book details, ISBN, and live stock count.
 3. Borrows: Handles the relationship between Members and Books (issue dates, return dates, and status).
+
+
+How to Run the Project:
+
+Prerequisites
+- Java Development Kit (JDK) 17 or higher installed.
+- PostgreSQL database server running locally.
+- An IDE (IntelliJ IDEA or NetBeans).
+
+Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Farzaneh-Nasrabadii/library-management-system.git
