@@ -43,4 +43,4 @@ Prerequisites
 Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Farzaneh-Nasrabadii/library-management-system.git
+   git clone https://github.com/Farzaneh-Nasrabadii/Library-management-System.git
