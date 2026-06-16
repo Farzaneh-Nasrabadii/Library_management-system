@@ -2,18 +2,17 @@ package controller;
 
 import model.Book;
 import repository.BookRepository;
+import java.util.List;
 
 public class BookController {
-    // Connect the controller to the repository layer
     private BookRepository bookRepository;
 
     public BookController() {
         this.bookRepository = new BookRepository();
     }
 
-    // Business Logic: Validate book data before saving it to the database
+    // Business Logic: Validate book data before saving
     public void registerNewBook(String title, String author, String isbn, int totalCopies) {
-        // Simple validation: Ensure title and ISBN are not empty
         if (title == null || title.trim().isEmpty()) {
             System.out.println("⚠️ Validation Error: Book title cannot be empty!");
             return;
@@ -23,11 +22,26 @@ public class BookController {
             return;
         }
 
-        // If validation passes, create a new Book model object
-        // availableCopies is initially equal to totalCopies
         Book book = new Book(0, title, author, isbn, totalCopies, totalCopies);
-
-        // Pass the object to the repository layer to save it
         bookRepository.addBook(book);
+    }
+
+    // New Business Logic: Handle dual-mode searching (text or scanner)
+    public void findBooks(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            System.out.println("⚠️ Please enter a keyword to search!");
+            return;
+        }
+
+        List<Book> results = bookRepository.searchBooks(keyword);
+
+        if (results.isEmpty()) {
+            System.out.println("🔍 No books found matching: " + keyword);
+        } else {
+            System.out.println("🔍 Search Results for '" + keyword + "':");
+            for (Book b : results) {
+                System.out.println(" -> " + b.getTitle() + " by " + b.getAuthor() + " (ISBN: " + b.getIsbn() + ")");
+            }
+        }
     }
 }
