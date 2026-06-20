@@ -4,7 +4,6 @@ import controller.BorrowController;
 import java.util.Scanner;
 
 public class Main {
-    // Static controllers and scanner to be shared across all panel methods
     private static BookController bookController = new BookController();
     private static MemberController memberController = new MemberController();
     private static BorrowController borrowController = new BorrowController();
@@ -15,7 +14,6 @@ public class Main {
         System.out.println("📚 Welcome to the Advanced Library System 📚");
         System.out.println("=========================================");
 
-        // Main Authentication and Role Selection Loop
         while (true) {
             System.out.println("\n--- LOGIN / ROLE SELECTION ---");
             System.out.println("1. Login as Librarian (Admin)");
@@ -27,7 +25,6 @@ public class Main {
 
             switch (roleChoice) {
                 case "1":
-                    // Librarian Security Check
                     System.out.print("🔑 Enter Admin Password: ");
                     String password = scanner.nextLine();
                     if (password.equals("admin123")) {
@@ -55,9 +52,6 @@ public class Main {
         }
     }
 
-    // =========================================================================
-    // 👑 PANEL 1: LIBRARIAN (ADMIN) MENU - Full Privileges
-    // =========================================================================
     private static void showAdminMenu() {
         while (true) {
             System.out.println("\n👑 --- LIBRARIAN ADMIN PANEL ---");
@@ -84,15 +78,15 @@ public class Main {
                     System.out.println("\n[Registering a New Member]");
                     System.out.print("Enter First Name: "); String fName = scanner.nextLine();
                     System.out.print("Enter Last Name: "); String lName = scanner.nextLine();
-                    System.out.print("Enter Phone Number: "); String phone = scanner.
-                        nextLine();
+                    System.out.print("Enter Phone Number: "); String phone = scanner.nextLine();
                     memberController.registerNewMember(fName, lName, phone);
                     break;
 
                 case "3":
                     System.out.println("\n[Issuing a Book]");
                     System.out.print("Enter Member ID: "); int memberId = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Enter Book ID: "); int bookId = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Enter Book ID: "); int bookId = Integer.parseInt(scanner.
+                        nextLine());
                     borrowController.borrowBook(memberId, bookId);
                     break;
 
@@ -105,7 +99,7 @@ public class Main {
 
                 case "5":
                     System.out.println("Logging out from Admin Panel...");
-                    return; // Returns to the login screen loop
+                    return;
 
                 default:
                     System.out.println("⚠️ Invalid option! Try again.");
@@ -114,9 +108,6 @@ public class Main {
         }
     }
 
-    // =========================================================================
-    // 👤 PANEL 2: MEMBER PANEL - Read-Only Privileges
-    // =========================================================================
     private static void showMemberMenu() {
         while (true) {
             System.out.println("\n👤 --- MEMBER ACCESS PANEL ---");
@@ -136,7 +127,7 @@ public class Main {
 
                 case "2":
                     System.out.println("Returning to Login Screen...");
-                    return; // Returns to the login screen loop
+                    return;
 
                 default:
                     System.out.println("⚠️ Invalid option! Try again.");

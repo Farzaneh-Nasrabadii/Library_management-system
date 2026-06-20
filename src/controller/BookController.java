@@ -21,12 +21,16 @@ public class BookController {
             System.out.println("⚠️ Validation Error: ISBN cannot be empty!");
             return;
         }
+        if (totalCopies < 0) {
+            System.out.println("⚠️ Validation Error: Total copies cannot be negative!");
+            return;
+        }
 
         Book book = new Book(0, title, author, isbn, totalCopies, totalCopies);
         bookRepository.addBook(book);
     }
 
-    // New Business Logic: Handle dual-mode searching (text or scanner)
+    // Business Logic: Handle dual-mode searching (text or scanner)
     public void findBooks(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
             System.out.println("⚠️ Please enter a keyword to search!");
@@ -40,7 +44,7 @@ public class BookController {
         } else {
             System.out.println("🔍 Search Results for '" + keyword + "':");
             for (Book b : results) {
-                System.out.println(" -> " + b.getTitle() + " by " + b.getAuthor() + " (ISBN: " + b.getIsbn() + ")");
+                System.out.println(" -> ID [" + b.getBookId() + "] " + b.getTitle() + " by " + b.getAuthor() + " | Available: " + b.getAvailableCopies() + "/" + b.getTotalCopies());
             }
         }
     }

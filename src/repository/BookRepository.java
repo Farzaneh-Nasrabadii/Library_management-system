@@ -32,7 +32,7 @@ public class BookRepository {
         }
     }
 
-    // New Method: Search books by Title, Author, or exact ISBN
+    // Method to search books by Title, Author, or exact ISBN
     public List<Book> searchBooks(String keyword) {
         List<Book> books = new ArrayList<>();
         String query = "SELECT * FROM books WHERE title ILIKE ? OR author ILIKE ? OR isbn = ?";
