@@ -52,7 +52,4 @@ The system relies on three relational tables managed under strict Foreign Key co
 ### Installation & Setup
 
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/Farzaneh-Nasrabadii/Library-Management-System.git](https://github.com/YOUR_USERNAME/Library-Management-System.git)
-   cd Library-Management-System
-
+git clone https://github.com/Farzaneh-Nasrabadii/Library-Management-System.git
