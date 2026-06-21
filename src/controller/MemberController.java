@@ -2,7 +2,7 @@ package controller;
 
 import model.Member;
 import repository.MemberRepository;
-import java.util.Date;
+import java.util.List;
 
 public class MemberController {
     private MemberRepository memberRepository;
@@ -11,9 +11,7 @@ public class MemberController {
         this.memberRepository = new MemberRepository();
     }
 
-    // Business Logic: Validate member details before registration
-    public void registerNewMember(String firstName, String lastName, String phone) {
-        // Validation: First name and Last name must not be empty
+    public void registerNewMember(String firstName, String lastName, String phoneNumber) {
         if (firstName == null || firstName.trim().isEmpty()) {
             System.out.println("⚠️ Validation Error: First name cannot be empty!");
             return;
@@ -22,16 +20,20 @@ public class MemberController {
             System.out.println("⚠️ Validation Error: Last name cannot be empty!");
             return;
         }
-        // Validation: Phone number must have a valid length (e.g., at least 10 digits)
-        if (phone == null || phone.trim().length() < 10) {
-            System.out.println("⚠️ Validation Error: Invalid phone number! Must be at least 10 digits.");
-            return;
-        }
-
-        // If validation passes, create a Member object with the current registration date
-        Member member = new Member(0, firstName, lastName, phone, new Date());
-
-        // Pass to repository to save in PostgreSQL
+        Member member = new Member(0, firstName, lastName, phoneNumber);
         memberRepository.addMember(member);
+    }
+
+    // NEW METHOD: List all library members
+    public void listAllMembers() {
+        List<Member> members = memberRepository.getAllMembers();
+        if (members.isEmpty()) {
+            System.out.println("📭 No members found in the library database.");
+        } else {
+            System.out.println("\n👤 --- REGISTERED MEMBERS LIST ---");
+            for (Member m : members) {
+                System.out.println(" -> ID: " + m.getMemberId() + " | Name: " + m.getFirstName() + " " + m.getLastName() + " | Phone: " + m.getPhoneNumber());
+            }
+        }
     }
 }

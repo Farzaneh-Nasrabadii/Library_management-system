@@ -15,7 +15,7 @@ public class Main {
         System.out.println("=========================================");
 
         while (true) {
-            System.out.println("\n--- LOGIN / ROLE SELECTION ---");
+            System.out.println("\n--- MAIN LOGIN SCREEN ---");
             System.out.println("1. Login as Librarian (Admin)");
             System.out.println("2. Access as Library Member");
             System.out.println("3. Exit System");
@@ -59,50 +59,64 @@ public class Main {
             System.out.println("2. Register a New Member");
             System.out.println("3. Issue / Borrow a Book");
             System.out.println("4. Return a Borrowed Book");
-            System.out.println("5. Back to Login Screen");
-            System.out.print("👉 Select an action (1-5): ");
+            System.out.println("5. View All Books (Report)");
+            System.out.println("6. View All Members (Report)");
+            System.out.println("7. Back to Login Screen");
+            System.out.print("👉 Select an action (1-7): ");
 
             String choice = scanner.nextLine();
 
-            switch (choice) {
-                case "1":
-                    System.out.println("\n[Adding a New Book]");
-                    System.out.print("Enter Title: "); String title = scanner.nextLine();
-                    System.out.print("Enter Author: "); String author = scanner.nextLine();
-                    System.out.print("Enter ISBN: "); String isbn = scanner.nextLine();
-                    System.out.print("Enter Total Copies: "); int copies = Integer.parseInt(scanner.nextLine());
-                    bookController.registerNewBook(title, author, isbn, copies);
-                    break;
+            try {
+                switch (choice) {
+                    case "1":
+                        System.out.println("\n[Adding a New Book]");
+                        System.out.print("Enter Title: "); String title = scanner.nextLine();
+                        System.out.print("Enter Author: "); String author = scanner.nextLine();
+                        System.out.print("Enter ISBN: "); String isbn = scanner.nextLine();
+                        System.out.print("Enter Total Copies: ");
+                        int copies = Integer.parseInt(scanner.nextLine()); // Safe from crashing via catch
+                        bookController.registerNewBook(title, author, isbn, copies);
+                        break;
 
-                case "2":
-                    System.out.println("\n[Registering a New Member]");
-                    System.out.print("Enter First Name: "); String fName = scanner.nextLine();
-                    System.out.print("Enter Last Name: "); String lName = scanner.nextLine();
-                    System.out.print("Enter Phone Number: "); String phone = scanner.nextLine();
-                    memberController.registerNewMember(fName, lName, phone);
-                    break;
+                    case "2":
+                        System.out.println("\n[Registering a New Member]");
+                        System.out.print("Enter First Name: "); String fName = scanner.nextLine();
+                        System.out.print("Enter Last Name: "); String lName = scanner.nextLine();
+                        System.out.print("Enter Phone Number: "); String phone = scanner.nextLine();
+                        memberController.registerNewMember(fName, lName, phone);
+                        break;
 
-                case "3":
-                    System.out.println("\n[Issuing a Book]");
-                    System.out.print("Enter Member ID: "); int memberId = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Enter Book ID: "); int bookId = Integer.parseInt(scanner.
-                        nextLine());
-                    borrowController.borrowBook(memberId, bookId);
-                    break;
+                    case "3":
+                        System.out.println("\n[Issuing a Book]");
+                        System.out.print("Enter Member ID: "); int memberId = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Enter Book ID: "); int bookId = Integer.parseInt(scanner.nextLine());
+                        borrowController.borrowBook(memberId, bookId);
+                        break;
 
-                case "4":
-                    System.out.println("\n[Returning a Book]");
-                    System.out.print("Enter Member ID: "); int mId = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Enter Book ID: "); int bId = Integer.parseInt(scanner.nextLine());
-                    borrowController.returnBook(mId, bId);
-                    break;
+                    case "4":
+                        System.out.println("\n[Returning a Book]");
+                        System.out.print("Enter Member ID: "); int mId = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Enter Book ID: "); int bId = Integer.parseInt(scanner.nextLine());
+                        borrowController.returnBook(mId, bId);
+                        break;
 
-                case "5":
-                    System.out.println("Logging out from Admin Panel...");
-                    return;
+                    case "5":
+                        bookController.listAllBooks();
+                        break;
 
-                default:
-                    System.out.println("⚠️ Invalid option! Try again.");
+                    case "6":
+                        memberController.listAllMembers();
+                        break;
+
+                    case "7":
+                        System.out.println("Logging out from Admin Panel...");
+                        return;
+
+                    default:
+                        System.out.println("⚠️ Invalid option! Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Input Error: Please enter numbers only for IDs and copies!");
             }
             System.out.println("\n-----------------------------------------");
         }

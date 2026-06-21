@@ -1,20 +1,17 @@
 package model;
 
-import java.util.Date;
-
 public class Member {
     private int memberId;
     private String firstName;
     private String lastName;
-    private String phone;
-    private Date joinDate;
+    private String phoneNumber;
 
-    public Member(int memberId, String firstName, String lastName, String phone, Date joinDate) {
+    // Constructor with 4 arguments matching the Controller requirements
+    public Member(int memberId, String firstName, String lastName, String phoneNumber) {
         this.memberId = memberId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
-        this.joinDate = joinDate;
+        this.phoneNumber = phoneNumber;
     }
 
     // Getters and Setters
@@ -27,9 +24,6 @@ public class Member {
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-
-    public Date getJoinDate() { return joinDate; }
-    public void setJoinDate(Date joinDate) { this.joinDate = joinDate; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }
