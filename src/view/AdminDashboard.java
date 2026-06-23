@@ -41,6 +41,15 @@ public class AdminDashboard extends JFrame {
         btnIssueBook.setFont(btnFont);
         btnReturnBook.setFont(btnFont);
 
+        // Link the "Register New Book" button to the AddBookView window
+        btnAddBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddBookView addBookWindow = new AddBookView();
+                addBookWindow.setVisible(true);
+            }
+        });
+
         buttonPanel.add(btnAddBook);
         buttonPanel.add(btnAddMember);
         buttonPanel.add(btnIssueBook);
