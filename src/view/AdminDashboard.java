@@ -50,6 +50,15 @@ public class AdminDashboard extends JFrame {
             }
         });
 
+        // Link the "Register New Member" button to the AddMemberView window
+        btnAddMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddMemberView addMemberWindow = new AddMemberView();
+                addMemberWindow.setVisible(true);
+            }
+        });
+
         buttonPanel.add(btnAddBook);
         buttonPanel.add(btnAddMember);
         buttonPanel.add(btnIssueBook);

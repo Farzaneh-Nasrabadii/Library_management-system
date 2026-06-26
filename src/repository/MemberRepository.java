@@ -12,7 +12,7 @@ public class MemberRepository {
 
     // Method to add a new member to PostgreSQL
     public void addMember(Member member) {
-        String query = "INSERT INTO members (first_name, last_name, phone_number) VALUES (?, ?, ?)";
+        String query = "INSERT INTO members (first_name, last_name, phone) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
