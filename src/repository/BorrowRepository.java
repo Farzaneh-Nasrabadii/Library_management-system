@@ -14,6 +14,7 @@ public class BorrowRepository {
         String insertQuery = "INSERT INTO borrows (member_id, book_id, borrow_date, return_date, status) VALUES (?, ?, ?, ?, ?)";
         String updateBookQuery = "UPDATE books SET available_copies = available_copies - 1 WHERE book_id = ?";
 
+        // Since DatabaseConnection is in the same package (repository), we call it directly
         try (Connection conn = DatabaseConnection.getConnection()) {
             // Disable auto-commit for Transaction Management (ACID principles)
             conn.setAutoCommit(false);
@@ -39,12 +40,12 @@ public class BorrowRepository {
                     }
                 }
 
-                // 2. Insert into borrows table
+                // 2. Insert into borrows table (Using clean SQL Dates to avoid getter issues)
                 insertStmt.setInt(1, borrow.getMemberId());
                 insertStmt.setInt(2, borrow.getBookId());
-                insertStmt.setDate(3, new java.sql.Date(borrow.getBorrowDate().getTime()));
-                insertStmt.setNull(4, java.sql.Types.DATE);
-                insertStmt.setString(5, borrow.getStatus());
+                insertStmt.setDate(3, new java.sql.Date(new java.util.Date().getTime())); // Current date for borrowing
+                insertStmt.setNull(4, java.sql.Types.DATE); // Return date is null at the beginning
+                insertStmt.setString(5, "BORROWED"); // Default status
                 insertStmt.executeUpdate();
 
                 // 3. Decrease available copies in books table
@@ -62,6 +63,7 @@ public class BorrowRepository {
             }
 
         } catch (SQLException e) {
+            System.out.println("❌ Database connection error!");
             e.printStackTrace();
         }
     }

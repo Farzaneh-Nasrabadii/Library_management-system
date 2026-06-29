@@ -111,5 +111,13 @@ public class AdminDashboard extends JFrame {
                 // new LoginView().setVisible(true);
             }
         });
+        // 5. Logout Action
+        btnLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close dashboard
+                new LoginView().setVisible(true); // Successfully redirects to Login Window
+            }
+        });
     }
 }
